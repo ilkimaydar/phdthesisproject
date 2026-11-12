@@ -1,2 +1,2 @@
-# phdthesisproject
-phdthesisproject
+# phdthesisrepository
+phdthesisrepository
