@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Literature map | Physical visual attacks on AV perception</title>
+<meta name="description" content="PhD research: lightweight and explainable detection of physical visual adversarial attacks on object detection in autonomous vehicles. Work in progress.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="brand" href="index.html">AV visual-attack detection research</a><nav><a href="index.html">Overview</a><a href="design.html">Research design</a><a href="literature.html" class="on">Literature map</a><a href="about.html">About</a></nav></div></header>
+<main class="wrap">
+
+<section class="hero"><div class="kicker">Literature map</div><h1>Papers collected so far</h1>
+<p class="lead">Search and filter the catalog. A green badge means the bibliographic record was matched automatically against Crossref or the arXiv API. One-line summaries are paraphrases written with AI assistance and are not yet audited: read the paper before relying on one.</p></section>
+<div class="controls">
+<input id="q" type="search" placeholder="Search title, author, venue, summary" aria-label="Search">
+<select id="topic" aria-label="Topic"></select>
+<select id="role" aria-label="Role"></select>
+<select id="ver" aria-label="Verification"><option value="">Any verification</option><option value="verified">Verified record</option><option value="other">Not yet verified</option></select>
+<select id="oa" aria-label="Open access"><option value="">Any access</option><option value="yes">Open PDF known</option><option value="no">No open PDF known</option></select>
+</div>
+<p class="muted small"><span id="count">Loading...</span> &middot; data built <span id="built"></span></p>
+<table class="papers"><thead><tr><th data-k="title">Paper</th><th data-k="year">Year</th><th>Links</th></tr></thead><tbody id="rows"></tbody></table>
+<script src="assets/literature.js"></script>
+
+</main>
+<footer><div class="wrap">Work in progress, PhD thesis research. Nothing on this site is peer reviewed or independently audited. Built 2026-11-19 23:51 UTC from the repository <a href="https://github.com/ilkimaydar/phdthesisproject">ilkimaydar/phdthesisproject</a>.</div></footer>
+</body>
+</html>

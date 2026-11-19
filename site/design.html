@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Research design | Physical visual attacks on AV perception</title>
+<meta name="description" content="PhD research: lightweight and explainable detection of physical visual adversarial attacks on object detection in autonomous vehicles. Work in progress.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="brand" href="index.html">AV visual-attack detection research</a><nav><a href="index.html">Overview</a><a href="design.html" class="on">Research design</a><a href="literature.html">Literature map</a><a href="about.html">About</a></nav></div></header>
+<main class="wrap">
+
+<section class="hero"><div class="kicker">Research design &middot; hypotheses</div><h1>Five consistency checks around a frozen detector</h1>
+<p class="lead">Every design keeps the existing detector unchanged, adds one cheap physical cue, and turns their disagreement into a calibrated decision that can also say "not enough evidence".</p></section>
+<div class="flow"><div class="step"><b>Input</b>Camera frames with or without a physical attack</div><div class="arrow">&rarr;</div><div class="step"><b>Existing detector</b>Frozen object or sign detector: boxes, labels, confidence</div><div class="arrow">+</div><div class="step"><b>Independent cue</b>Cheap physical evidence: shape, shadow, reflection, light, motion</div><div class="arrow">&rarr;</div><div class="step"><b>Consistency check</b>Do the cue and the detector output agree?</div><div class="arrow">&rarr;</div><div class="step"><b>Decision</b>Flag with the region and cue that caused it, or no alarm or abstain</div></div>
+<div class="notice">Shared evaluation stance: compare methods at matched false-alarm operating points, on held-out recordings, and report processing time per frame. None of these designs has been implemented or tested yet.</div>
+<div class="grid">
+<div class="card" id="appearance"><span class="tag">1. Object appearance</span><h3>Viewpoint-aware structural disagreement</h3>
+<p>Low-cost evidence that an object&#x27;s geometry and the detector&#x27;s output disagree, without rebuilding the whole image.</p>
+<dl class="kv"><dt>Independent cue</dt><dd>Contour, edges, sign shape, local colour and texture of the object region</dd><dt>Consistency check</dt><dd>Align the object region, track viewpoint and scale, compare the contour with the box and the label</dd><dt>Proposed module</dt><dd>Viewpoint-conditioned shape and detector mismatch with calibrated uncertainty</dd>
+<dt>Open questions</dt><dd><ul class="tight"><li>Does class-specific contour consistency add signal against natural-looking patches, beyond texture?</li><li>Can a tiny head generalize across viewing angles?</li></ul></dd></dl>
+
+<div class="limit"><b>Known weak point.</b> Severe occlusion or artistic signs may destroy the geometric evidence; abstentions must be reported.</div>
+<p class="small"><a href="literature.html#topic=appearance">48 papers on this cue</a></p></div>
+<div class="card" id="shadows"><span class="tag">2. Shadows</span><h3>Physics-gated temporal shadow evidence</h3>
+<p>Check whether shadow movement is physically plausible before treating a detector failure as an attack.</p>
+<dl class="kv"><dt>Independent cue</dt><dd>Shadow mask and edges, motion and a light-direction proxy</dd><dt>Consistency check</dt><dd>Align the shadow to the sign, correct for camera motion, estimate the plausible change</dd><dt>Proposed module</dt><dd>Shadow and geometry consistency residual with a reliability gate</dd>
+<dt>Open questions</dt><dd><ul class="tight"><li>Can a physical reliability gate lower false positives on tree and cloud shadows?</li><li>Can it detect temporally coherent attack shadows?</li></ul></dd></dl>
+<p class="small muted" style="margin-bottom:2px">Closest prior work flagged by the literature pass (not yet audited):</p><ul class="tight small"><li><span class="title">Exposing photo manipulation with inconsistent shadows</span> <span class="muted small">(Kee, 2013)</span></li><li><span class="title">Validating the Contextual Information of Outdoor Images for Photo Misuse Detection</span> <span class="muted small">(Li, 2018)</span></li><li><span class="title">Shadows Aren&#x27;t So Dangerous After All: A Fast and Robust Defense Against Shadow-Based Adversarial Attacks</span> <span class="muted small">(Wang, 2022)</span></li></ul>
+<div class="limit"><b>Known weak point.</b> Physically plausible malicious shadows may be indistinguishable from benign ones in RGB alone.</div>
+<p class="small"><a href="literature.html#topic=shadows">45 papers on this cue</a></p></div>
+<div class="card" id="reflections"><span class="tag">3. Reflections</span><h3>View-conditioned light consistency</h3>
+<p>Detect suspicious object responses to changing view and illumination without assuming every reflection is malicious.</p>
+<dl class="kv"><dt>Independent cue</dt><dd>Specular regions and saturation, camera motion and a light proxy</dd><dt>Consistency check</dt><dd>Track the reflected region, contrast it with the nearby surface, estimate exposure drift</dd><dt>Proposed module</dt><dd>View-conditioned reflection residual with a confidence or abstain output</dd>
+<dt>Open questions</dt><dd><ul class="tight"><li>Do low-cost view and illumination constraints reject natural highlights while detecting visible reflected-light attacks?</li></ul></dd></dl>
+<p class="small muted" style="margin-bottom:2px">Closest prior work flagged by the literature pass (not yet audited):</p><ul class="tight small"><li><span class="title">Remote Perception Attacks against Camera-based Object Recognition Systems and Countermeasures</span> <span class="muted small">(Man, 2024)</span></li><li><span class="title">Invisible Reflections: Leveraging Infrared Laser Reflections to Target Traffic Sign Perception</span> <span class="muted small">(Sato, 2024)</span></li></ul>
+<div class="limit"><b>Known weak point.</b> An RGB camera with an infrared-cut filter may not see an infrared attack; sensor assumptions must be stated.</div>
+<p class="small"><a href="literature.html#topic=reflections">45 papers on this cue</a></p></div>
+<div class="card" id="lighting"><span class="tag">4. Lighting</span><h3>Global-local exposure and flicker test</h3>
+<p>Combine local-versus-global illumination residuals with temporal flicker patterns under a fixed compute budget.</p>
+<dl class="kv"><dt>Independent cue</dt><dd>Global luminance trend, local residuals and stripe cues</dd><dt>Consistency check</dt><dd>Normalize exposure drift, track local light change, estimate flicker consistency</dd><dt>Proposed module</dt><dd>Exposure-aware local light anomaly score with a temporal flicker gate</dd>
+<dt>Open questions</dt><dd><ul class="tight"><li>Can a tiny exposure-flicker detector identify projected attacks without flagging normal headlight and auto-exposure changes?</li></ul></dd></dl>
+<p class="small muted" style="margin-bottom:2px">Closest prior work flagged by the literature pass (not yet audited):</p><ul class="tight small"><li><span class="title">Remote Perception Attacks against Camera-based Object Recognition Systems and Countermeasures</span> <span class="muted small">(Man, 2024)</span></li><li><span class="title">They See Me Rollin’: Inherent Vulnerability of the Rolling Shutter in CMOS Image Sensors</span> <span class="muted small">(Köhler, 2021)</span></li><li><span class="title">Invisible Adversarial Stripes on Traffic Sign: Threat and Defense for Autonomous Vehicles</span> <span class="muted small">(Guo, 2026)</span></li></ul>
+<div class="limit"><b>Known weak point.</b> Rolling-shutter and frame-rate aliasing can hide or imitate flicker; tests must cover several sensors.</div>
+<p class="small"><a href="literature.html#topic=lighting">42 papers on this cue</a></p></div>
+<div class="card" id="frames"><span class="tag">5. Changes across video frames</span><h3>Bounded causal multi-cue evidence</h3>
+<p>Lightweight sequential disagreement scoring with measured latency and an explicit insufficient-evidence state.</p>
+<dl class="kv"><dt>Independent cue</dt><dd>Optical flow, local light and appearance consistency across recent frames</dd><dt>Consistency check</dt><dd>Align recent frames, extract trajectory and cue gaps, check quality and occlusion</dd><dt>Proposed module</dt><dd>Causal evidence accumulation with bounded frame memory</dd>
+<dt>Open questions</dt><dd><ul class="tight"><li>Can bounded multi-cue evidence improve recall or warning time for unseen attacks while keeping a fixed false-alarm rate?</li></ul></dd></dl>
+<p class="small muted" style="margin-bottom:2px">Closest prior work flagged by the literature pass (not yet audited):</p><ul class="tight small"><li><span class="title">AdROD: HyperNetwork-based Adversarially Robust Object Detection for Autonomous Driving</span> <span class="muted small">(Wu, 2026)</span></li><li><span class="title">VisionGuard: Secure and Robust Visual Perception of Autonomous Vehicles in Practice</span> <span class="muted small">(Han, 2024)</span></li><li><span class="title">A Real-Time Defense Against Object Vanishing Adversarial Patch Attacks for Object Detection in Autonomous Vehicles</span> <span class="muted small">(Mu, 2025)</span></li></ul>
+<div class="limit"><b>Known weak point.</b> Prior work already uses temporal and physical consistency; any gain has to be shown as a controlled increment.</div>
+<p class="small"><a href="literature.html#topic=frames">45 papers on this cue</a></p></div></div>
+
+</main>
+<footer><div class="wrap">Work in progress, PhD thesis research. Nothing on this site is peer reviewed or independently audited. Built 2026-11-19 23:51 UTC from the repository <a href="https://github.com/ilkimaydar/phdthesisproject">ilkimaydar/phdthesisproject</a>.</div></footer>
+</body>
+</html>
