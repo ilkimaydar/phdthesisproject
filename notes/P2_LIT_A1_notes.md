@@ -17,13 +17,13 @@ Budget used: websearch 45 of 60, lit_verify 36 of 80 (ledger: 40 arXiv records, 
 1. Prior work already covers the slide 01 pipeline shape (frozen detector, independent cue, consistency check, alert). DetectorGuard (P2-P111) predicts objectness with a robust classifier, checks that detector boxes explain it, and raises an attack alert when they do not. It covers patch hiding only, certifies instead of calibrating, and its cue is objectness, not contour.
 2. Prior work already covers a low-cost shape-and-content check against stickers on signs. P2-P123 uses binarised networks on FPGA hardware, with a shape classifier (diamond, square, pentagon, octagon, reverse triangle) and a content check; the publisher page snippet states 93.82% on LISA and 76.50% on GTSRB under strong sticker attacks. It is a sign-classification defense, not a check on detector boxes; the snippets show no viewpoint conditioning and no calibrated uncertainty. P2-P124 covers the explainable side with symbolic shape, colour and text rules for stop signs.
 3. To our knowledge, no verified row combines (a) a contour or shape cue compared with detector boxes, (b) viewpoint conditioning and (c) calibrated uncertainty with abstention. This is a statement about 45 searches and abstract-level reading, not a proof of absence.
-4. "APDE" resolves to the code repository and dataset name released with P2-P143 (Zheng et al., ICCV 2025; 94,000 images, 11 defenses, 13 attacks). The abstract does not say what the letters stand for. Its findings: the difficulty of naturalistic patches lies in the data distribution, not in high frequency; adaptive attacks substantially bypass existing defenses; attack strength falls with distance (search snippet).
-5. Threats to a contour cue: patches placed along the sign outline (P2-P117), patches that are not on the object (screen patch P2-P118, lens patch P2-P120), advertising-style signs (P2-P121). A consistency check can itself be a target (P2-P127).
+4. "APDE" is best explained by the repository and dataset released with P2-P143 (Zheng et al., ICCV 2025; 94,000 images, 11 defenses, 13 attacks): the repository URL in its abstract contains APDE, and a repository snippet lists an "APDE Dataset". The letters are not expanded in anything read, and the slide was not re-read, so the identification with the slide phrase is UNVERIFIED. Its findings: the difficulty of naturalistic patches lies in the data distribution, not in high frequency; adaptive attacks substantially bypass existing defenses; attack strength falls with distance (search snippet).
+5. Threats to a contour cue: patches placed along the sign outline (P2-P117), patches that are not on the object (screen patch P2-P118, lens patch P2-P120), advertising-style attack patterns (P2-P121; target objects not named in the snippet). A consistency check can itself be a target (P2-P127).
 6. Slide wording: the Eykholt CVPR 2018 paper (P2-P101) attacks classifiers; the detector attack is the follow-up preprint P2-P102. X-Detect (P2-P134) was built and tested in retail. ADAV (P2-P136): an arXiv HTML table snippet gives accuracy 0.67 and recall 0.52 for patch scale below 0.8, against 0.88 and 0.95 above 0.8.
 7. Threat realism: commercial traffic sign recognition systems use a spatial memorisation design that lowers system-level attack success (P2-P119). REAP (P2-P141) concludes that patch attacks may be a smaller threat than believed. Paper 2 should state its system and sensor assumptions.
 8. No public benchmark was found that gives physical patch attacks on road signs together with benign driving clips. REAP is digital rendering on 14,000+ real sign images (Mapillary Vistas; CC BY-NC-SA per a dataset-page snippet). APRICOT has physical photos, but its listed categories contain no road sign.
 
-All 14 leads of the brief were confirmed in a primary record (13 papers or datasets, plus APDE as a name; the APDE acronym expansion is not confirmed).
+Leads of the brief: 12 named papers or datasets were confirmed in a primary record (P2-P101, P2-P109 to P2-P116, P2-P134, P2-P141, P2-P142); the naturalistic-patch topic is covered by P2-P104, P2-P105 and P2-P117; APDE is only partly resolved (item 4). No lead of the brief was left without a candidate; the APDE identification and its letters remain unconfirmed.
 
 ## 1. Problem map (attack families and the papers that define them)
 
@@ -32,9 +32,10 @@ All 14 leads of the brief were confirmed in a primary record (13 papers or datas
 | Sticker or poster on a sign, classifier target | Black and white stickers on a stop sign; one universal printable patch | P2-P101, P2-P103 | P2-P101 abstract: targeted misclassification in 100% of lab images and 84.8% of video frames from a moving vehicle |
 | Sticker or poster on a sign, detector target | Disappearance of a stop sign for the detector; mis-detection as another class | P2-P102, P2-P108 | P2-P102 abstract: YOLOv2 missed the sign in over 85% of lab frames; outdoors 72.5% (poster) and 63.5% (stickers). P2-P108: Faster R-CNN mis-detected perturbed stop signs |
 | Natural-looking patches | Patch drawn from a GAN image manifold, black-box search, edge-aligned colour-matched patch, advertising-style sign | P2-P104, P2-P105, P2-P117, P2-P121 | P2-P117 abstract: over 90% attack success on sign classifiers under limited query budgets, masks follow the sign shape |
-| Whole-surface camouflage | Texture over a full 3D vehicle surface | P2-P106, P2-P107 | P2-P107 abstract: tested on 15 detector models; P2-P106 is simulation-based (physical details not read) |
+| Whole-surface camouflage | Texture over a full 3D vehicle surface | P2-P106, P2-P107 | P2-P107 abstract: tested on 15 detector models; P2-P106 abstract describes rendering and transfer into photorealistic scenes (physical details not read) |
 | Patch not on the object | Screen patch on another moving vehicle; translucent patch on the camera lens | P2-P118, P2-P120 | P2-P120 abstract: 42.27% of stop sign instances undetected while nearly 80% of other classes stay detected |
 | Reality checks on the threat | Commercial systems, realistic rendering, viewpoint and distance | P2-P119, P2-P141, P2-P143, P2-P145 | P2-P119 abstract: 100% success on one commercial functionality, much lower overall, 7 observations; P2-P145: effectiveness varies with viewpoint, distance and scene |
+| Benign look-alikes (no attack) | Harmless alterations of signs: shape, colour, content, visibility, angle, background | P2-P144 | Abstract: notable drop in YOLOv7 detection and classification accuracy; no attack detector evaluated |
 | Surveys | Overview of attacks on sign recognition | P2-P122 | abstract level only |
 
 ## 2. Solution map (defense and detection families)
@@ -45,6 +46,7 @@ All 14 leads of the brief were confirmed in a primary record (13 papers or datas
 | Certified or provable | Masking with a proof; alert or recovery | P2-P111, P2-P112, P2-P113 | Extra robust classifier or many masked passes; cost not read. P2-P113 is a classifier defense |
 | Output-consistency checks | Compare detector output between region and whole frame, between tasks, with scene context, or over frames | P2-P125, P2-P126, P2-P128, P2-P136, P2-P139; the attack on the idea is P2-P127 | Cheap when no extra model is needed; P2-P128 needs a second task model; P2-P136 and P2-P139 use frames |
 | Shape and symbolic cues | Sign shape class, colour and text rules | P2-P123, P2-P124 | P2-P124 is explainable by construction (abstract); both classify signs rather than check detector boxes |
+| Runtime anomaly detectors for sign or perception inputs | A learned model of clean signs or inputs flags and repairs altered ones | P2-P131, P2-P147 (title-level) | P2-P131 has a detector plus a clean-sign generator; cost not read |
 | Explainable detection | Ensemble of explainable detectors, saliency, attention maps, attribution | P2-P134, P2-P135, P2-P138, P2-P124, P2-P136 | See section 4, question 4 |
 | Lightweight or embedded | Binarised networks on FPGA, block autoencoder, edge-device framework | P2-P123, P2-P133, P2-P146, P2-P137 (title claim) | Latency figures not read; P2-P146 snippet lists a Jetson Orin Nano and a laptop as test platforms |
 | Calibration and abstention | Evidential learning, Bayesian-uncertainty baseline | P2-P140, P2-P142 (baseline inside the dataset paper), P2-P111 (alert semantics) | No patch-specific calibrated abstention for road signs found. A conformal abstention paper (arXiv 2502.07255) is in the ledger and excluded as not attack-specific |
@@ -73,7 +75,7 @@ Question 1: which defenses compare an object's expected shape or contour with de
 Question 2: which defenses stay effective against natural-looking patches, and which rely on high-frequency texture?
 - Built for or tested on naturalistic patches: P2-P114 (feature modulation, built for them), P2-P115 (the abstract says entropy stays high even for naturalistic patches; about 90% of patches detected on average, up to 94% of successful attacks recovered), P2-P116 (tested on localized-noise, printable and naturalistic patches), P2-P132 (earlier-submission abstract: 8% higher mean average precision on the naturalistic patch).
 - Texture or frequency cues: P2-P109 (abstract: patches tend to be highly textured), P2-P115 (entropy), P2-P130 (Error Level Analysis, Haralick texture), P2-P132 (high-frequency signature), P2-P129 (wavelet scales; AP 21.73% above earlier defenses under adaptive attacks, abstract).
-- Masking-based defenses (P2-P111, P2-P112, P2-P113) are stated to work without knowing patch shape, size or location; their patch-size assumptions were not read.
+- Masking-based defenses: ObjectSeeker (P2-P112) states that its masking works without knowing patch shape, size or location; DetectorGuard (P2-P111) and PatchCleanser (P2-P113) certify against any attacker within a threat model whose patch-size bound was not read.
 - The benchmark P2-P143 reports that naturalistic patch difficulty lies in data distribution rather than high frequency, and that training on its dataset improved existing defenses by 15.09% AP@0.5 (abstract). The P2-P109 repository note that the released code handles PGD patches only is from a search snippet and is UNVERIFIED.
 
 Question 3: which benchmarks give physical patch attacks on road signs with benign clips, and under which licence?
@@ -90,7 +92,7 @@ Question 4: what does "explainable" mean in the existing defenses?
 - P2-P136 ADAV: gradient-based attribution localises the pixels that break temporal consistency.
 - P2-P109, P2-P110, P2-P115, P2-P116: a patch mask or repaired image (where the patch is, not why the alarm fired).
 - P2-P111: the alert is tied to objectness that no detector box explains.
-- No abstract read pairs an explanation with a calibrated confidence.
+- Only the AEGIS abstract (P2-P140) names interpretability together with calibrated uncertainty, for digital image classification; no detector of physical attacks read here pairs an explanation with a calibrated confidence.
 
 ## 5. Gaps and what is left to test
 
@@ -98,11 +100,12 @@ Question 4: what does "explainable" mean in the existing defenses?
 2. Slide 01 question "does class-specific contour consistency add signal against natural-looking patches, beyond texture": P2-P143 suggests the main difficulty is data distribution, so test the contour cue as an add-on to P2-P114, P2-P115 and P2-P116, not as a replacement (card C2).
 3. Slide 01 question "can a tiny head generalise across viewing angles": hold out viewpoint bins; P2-P143 and P2-P145 show attack strength varies with distance and viewpoint (card C5).
 4. Patch location: edge-aligned, off-object and lens patches (P2-P117, P2-P118, P2-P120) are not covered by any defense row (card C3).
-5. Benign look-alikes: P2-P144 measures harmless sign alterations against YOLOv7 but evaluates no detector of attacks; P2-P121 shows advertising-style signs as attacks. No row evaluates an attack detector on benign altered signs (card C4).
+5. Benign look-alikes: P2-P144 measures harmless sign alterations against YOLOv7 but evaluates no detector of attacks; P2-P121 shows advertising-style patterns as attacks. No row evaluates an attack detector on benign altered signs (card C4).
 6. Adaptive attackers: P2-P127 targets consistency checks; P2-P143 reports adaptive attacks bypass defenses and that complex or stochastic defenses are relatively robust. Plan an adaptive-attack test of any mismatch score.
 7. Compute: no ms-per-frame number was read for any shape or consistency check. Measure all stages on the laptop, including decode and queueing.
 8. System realism: P2-P119 reports spatial memorisation in commercial systems. Include a temporal-smoothing baseline and report frame-level and event-level results.
 9. Sensor assumption: every cue here is RGB-camera based.
+10. Next reading to close the shape-cue question: the defense groups of the 2026 survey by Andleeb et al. (DOI 10.1016/j.ijcce.2026.06.003, in the ledger; its snippet lists structure-aware reasoning), and the full text of P2-P123 and P2-P111.
 
 ## 6. Problem cards (hypotheses, not results)
 
@@ -151,7 +154,7 @@ Laptop limits from state/DECK_DIGEST.md section 4: one laptop, 32 GB RAM, severa
 ### Card C5 - Attack strength and shape visibility change with viewpoint
 - Problem: the same patch is strong at some distances and angles and weak at others, and an outline is less visible at small scale or oblique angles, so one global threshold over-alarms or misses.
 - Contribution to test: hypothesis that conditioning the mismatch score on viewpoint proxies (region size, aspect ratio, skew) and calibrating per bin gives better-calibrated alarms, and that a small head trained on some bins generalises to held-out bins.
-- Prior work already covers: measurement of attack strength versus distance and viewpoint (P2-P143 snippet, P2-P145). Not found in two viewpoint-oriented queries: a defense that conditions on viewpoint. Coverage is limited.
+- Prior work already covers: measurement of attack strength versus distance and viewpoint (P2-P143 snippet, P2-P145). Not found in two queries on viewpoint or 3D geometry: a defense that conditions on viewpoint. Coverage is limited.
 - Open-source starting point: REAP geometric transforms (P2-P141) to build viewpoint bins; the AdvScene idea of a viewpoint sweep (P2-P145; code not seen); OpenCV homography and ellipse fits.
 - Data and laptop fit: REAP images binned by transform parameters; CPU; small head (logistic regression or a tiny network). Licence question: as in C1.
 - Experiment workflow: (1) bin REAP signs by transform parameters; (2) train on some bins and test on held-out bins; (3) compare global calibration with per-bin calibration; (4) log abstain when a bin offers too few reliable contour pixels.
@@ -164,7 +167,7 @@ Laptop limits from state/DECK_DIGEST.md section 4: one laptop, 32 GB RAM, severa
 |---|---|---|---|---|
 | REAP | P2-P141 | 14,000+ real sign images (Mapillary Vistas) with geometric and lighting transforms; digital patch rendering; code named in the abstract | Mapillary Vistas CC BY-NC-SA per a dataset-page snippet (non-commercial, share-alike; the snippet goes on to mention a login); REAP code licence not read | Images only, no clips |
 | APRICOT | P2-P142 | 1,000+ photographs of printed patches in public places, three COCO detectors, defense baselines | Not read (project page seen in a search result) | No road sign class in the listed categories |
-| APDE dataset and code | P2-P143 | 94 patch types, 94,000 images, benchmark of 11 defenses | Not read | Patch types; sign content unknown |
+| APDE dataset and code (best candidate for the slide term) | P2-P143 | 94 patch types, 94,000 images, benchmark of 11 defenses | Not read | Patch types; sign content unknown |
 | Videos of clean and attacked signs | P2-P139 | Used in the VisionGuard* paper | Not seen | Release not seen |
 | Commercial system measurement | P2-P119 | Attack tests on commercial sign recognition | Not seen | Threat realism; no data seen |
 | Superstore dataset | P2-P134 | Retail scenes for X-Detect | Not seen | Not a road setting |
@@ -176,10 +179,10 @@ Code locations seen in rows (none opened, all UNVERIFIED unless the abstract nam
 ## 8. Leads not confirmed (12 items: 7 papers, 5 other items)
 
 Papers seen but not verified in any record:
-1. "Cloaking Signals with Signs: Traffic-Sign-Camouflaged Adversarial Patch": poster page of a 2026 vehicle security symposium, two search snippets; it hides objects from a detector while the patch resembles a real sign, so shape evidence agrees with a sign. Tried: Crossref title search (no match), arXiv API (closed). Check on the venue page.
-2. "Adversarial Patch Detection: Leveraging Depth Contrast for Enhanced Threat Visibility": a 2024 workshop paper title seen in a paper-list snippet; a geometric cue. Tried: nothing beyond the snippet.
+1. "Cloaking Signals with Signs: Traffic-Sign-Camouflaged Adversarial Patch": poster page of a 2026 vehicle security symposium, two search snippets; per the snippets it hides objects from a detector while the patch resembles a real traffic sign (a contour check might then see a plausible sign shape: inference). Tried: Crossref title search (no match); arXiv search not tried (API closed). Check on the venue page.
+2. "Adversarial Patch Detection: Leveraging Depth Contrast for Enhanced Threat Visibility": a 2024 workshop paper title seen in a paper-list snippet; depth contrast would be a geometric cue (inference from the title). Tried: nothing beyond the snippet.
 3. "NarAdv: Natural-Style Physical Adversarial Attack on Traffic Sign ...": a 2026 journal page snippet. Tried: snippet only.
-4. PhyCamo (AAAI 2025 page): multi-view camouflage attack; title seen in one search. Not verified.
+4. PhyCamo (AAAI proceedings page; year not shown in the snippet): multi-view camouflage attack; title seen in one search. Not verified.
 5. GRAC, "Gradient-Reweighted Adversarial Camouflage for Physical Object Detection Evasion" (ICCV 2025 open-access page snippet). Not verified.
 6. "Dynamic Adversarial Patch for Evading Object Detection Models" (arXiv 2010.13070 per a snippet). Not verified.
 7. "From Vulnerability to Robustness: A Survey of Patch Attacks and Defenses in Computer Vision" (2026, repository PDF snippet). Not verified.
@@ -194,8 +197,8 @@ Other items not confirmed:
 ## 9. Exclusions and verified records not catalogued
 
 Out of the subject or not read enough (reason in brackets):
-- Zhao et al., "Seeing isn't Believing" (CCS 2019; DOI 10.1145/3319535.3354259; arXiv 1812.10217; verified in the ledger): in scope; hiding and appearing attacks at 1 m to 25 m, up to 92.4% success in the abstract. Left out only to stay near the row target; add it if the coordinator wants a fuller attack list.
-- Thys et al. (arXiv 1904.08653) and the diffusion patch of Lin et al. (arXiv 2307.08076): person targets.
+- Zhao et al., "Seeing isn't Believing" (CCS 2019; DOI 10.1145/3319535.3354259; arXiv 1812.10217; verified in the ledger): in scope; hiding and appearing attacks at 1 m to 25 m, up to 92.4% success in the abstract. Not catalogued because the row count was already above the 45 target; add it for a fuller attack list.
+- Thys et al. (arXiv 1904.08653) and the diffusion patch of Lin et al. (arXiv 2307.08076): both verified in the ledger; person targets in surveillance and privacy settings, a gray zone against the road-sign focus. The diffusion paper is a naturalistic-patch generator and could be added to the F1 list.
 - Khan et al. hybrid defense (arXiv 2205.01225; TechRxiv record in the ledger): digital attacks only (PGD, FGSM, MIM, C&W); OCR as a local feature mapper.
 - Kumar et al. dual-threshold conformal abstention (arXiv 2502.07255): not attack-specific (CIFAR-100, ImageNet1K, ModelNet40). It is the nearest abstention pattern.
 - Shua et al., "Redesigning Traffic Signs to Mitigate Machine-Learning Patch Attacks" (arXiv 2402.04660): environment-side redesign with adversarial training; not a detection method.
