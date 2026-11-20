@@ -37,6 +37,7 @@ TOPICS = {
     "LIT_X13": ("monitor", "Runtime monitoring of perception"),
     "LIT_X14": ("targets", "Lanes, traffic lights, pedestrians, vehicles"),
     "DECK_SRC": ("background", "Background sources"),
+    "LIT_IEEE": ("ieee", "IEEE Xplore search pass"),
 }
 
 CLOSEST = {
