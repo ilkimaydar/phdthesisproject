@@ -1,5 +1,6 @@
 __pycache__/
 *.pyc
+SUPERSEDED_*
 .ipynb_checkpoints/
 desktop.ini
 Thumbs.db
