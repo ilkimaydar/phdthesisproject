@@ -407,7 +407,7 @@ def build(out, labels=None):
 <h2>Use of AI</h2>
 <p>The literature search, the verification scripts, the summaries and this site were produced with assistance from AI models (Anthropic Claude, run through the OpenCode agent tool) under the direction of the project owner. Every catalog entry carries its verification state, and nothing is presented as a finding before an independent check.</p>
 <h2>Licence</h2>
-<p>Not chosen yet. Until a licence file is added to the repository, all rights are reserved by the owner. Paper titles and bibliographic data belong to their publishers and authors.</p>
+<p>The repository is under the MIT License, chosen by the owner (LICENSE file in the repository). Paper titles and bibliographic data belong to their publishers and authors.</p>
 <h2>Repository</h2>
 <p>Source of this site, the catalogs and the scripts: <a href="https://github.com/ilkimaydar/phdthesisproject">github.com/ilkimaydar/phdthesisproject</a>. Corrections are welcome through GitHub issues.</p>
 """

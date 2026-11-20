@@ -38,7 +38,7 @@ Python 3.10 or newer, standard library only.
 
 ## Licence
 
-Not chosen yet; until a licence file is added, all rights are reserved by the owner. Bibliographic data and titles belong to their publishers and authors.
+MIT License, chosen by the owner (see `LICENSE`). Paper titles, abstracts and other bibliographic data quoted in the catalogs belong to their publishers and authors.
 
 ## AI-use disclosure
 
