@@ -22,3 +22,9 @@ Written by the coordinator session. Not audited. Machine-collected candidates, p
 ## Next
 - Read the abstracts of the 205 high-score candidates and add rows (an agent task, or the coordinator in small batches); then verify published versions.
 - IEEE Xplore is paused (Error 418, see the state log); IEEE-indexed light and optic papers come later through the in-page loop scripts/pdf/ieee_search_loop.js.
+
+## Update 2 (same day): rows P2-P2617 to P2-P2635
+- 19 more rows read from abstracts (35 rows in total, all ARXIV_API_VERIFIED): laser-flare and dazzle protection (P2-P2617, P2-P2633), reliability-weighted fusion under glare (P2-P2618), brightness-restricted patch (P2-P2619), invisible rolling-shutter dazzle (P2-P2620), LiDAR temporal consistency check (P2-P2621), lighting attacks on vision-language models (P2-P2622), headlight control for low light (P2-P2623), multi-camera attacks (P2-P2624), projector-camera attack on faces (P2-P2625), and a new group O-F6 (detection, simulation, data and recovery for a light guard): P2-P2626 to P2-P2632, P2-P2635.
+- Most important new finding: P2-P2626 (AD^2, 2026) is the closest prior work to the planned guard so far: a lightweight attention-based attack detector built on spatial-temporal consistency, tested in CARLA closed loop against three non-light attack vectors. The guard's novelty must therefore rest on light and optic attacks, benign look-alikes, false alarms per hour and a measured latency, not on "consistency in CARLA". Its reported false-alarm and latency figures were not read (abstract only).
+- Simulation: P2-P2628 (sim-to-real gap of testing) must be cited when stating what CARLA results mean; P2-P2629 (REVAMP) and P2-P2631 (CARLA night data) are candidate generators of benign and attack-like lighting data.
+- Not read yet: about 130 candidates of the harvest (infrared and thermal attacks, shadow detection, unrelated matches); they were filtered by title only.
