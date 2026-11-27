@@ -32,14 +32,14 @@ How to run:
 3. Approve the Google Drive access dialog for your own account.
 4. The first run fetches LIMIT = 20 items. Look at the folder. Then set LIMIT = None in the settings cell and run all again.
 
-Where the files go: the folder in TARGET (settings cell). By default it is P2_open_access_PDFs inside the main project folder, next to P2_IEEE_PDFs, and it inherits that folder's sharing (anyone with the link at the time this notebook was written). With Drive for desktop in stream mode (the G: drive on your laptop) the PDFs stay online until you open them, unless the folder is marked available offline.
+Where the files go: the folder in TARGET (settings cell). By default it is P2_Light_Optic_Attacks/06_PDFs/open_access inside the main PhD research folder, and it inherits that folder's sharing (anyone with the link at the time this notebook was written). With Drive for desktop in stream mode (the G: drive on your laptop) the PDFs stay online until you open them, unless the folder is marked available offline.
 
 Copyright: these are personal research copies of open-access papers. Do not redistribute them.
 """
 
 SETTINGS = r"""PROJECT = '/content/drive/MyDrive/US/Documents/Projects/PhD_Thesis_Research_UDC_CS'
 MANIFEST = PROJECT + '/Opencode_PhD_Thesis_Research_UDC_CS/work/OA_RESOLVE/oa_manifest.csv'
-TARGET = PROJECT + '/Opencode_PhD_Thesis_Research_UDC_CS/P2_open_access_PDFs'
+TARGET = PROJECT + '/P2_Light_Optic_Attacks/06_PDFs/open_access'
 LIMIT = 20          # first run: 20 items; set to None to process every row
 PACE = {'export.arxiv.org': 5}
 DEFAULT_PACE = 6    # seconds between requests to any other host
