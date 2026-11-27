@@ -39,6 +39,7 @@ TOPICS = {
     "DECK_SRC": ("background", "Background sources"),
     "LIT_IEEE": ("ieee", "IEEE Xplore search pass"),
     "EMBED_1": ("embedded", "Vehicle computing platforms and latency budgets"),
+    "LIT_OPT": ("optic", "Light and optic attacks (arXiv harvest)"),
 }
 
 CLOSEST = {
