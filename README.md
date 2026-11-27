@@ -10,7 +10,8 @@ Physical attacks such as altered signs, stickers, shadows, reflected or projecte
 
 ## Live
 
-- Website: [ilkimaydar.github.io/phdthesisproject](https://ilkimaydar.github.io/phdthesisproject/) (GitHub Pages, deployed from `main` by `.github/workflows/pages.yml` once Pages is enabled with the source "GitHub Actions").
+- Website: [ilkimaydar.github.io/phdthesisproject](https://ilkimaydar.github.io/phdthesisproject/) (GitHub Pages, deployed from `main` by `.github/workflows/pages.yml`).
+- Hugging Face Space (static mirror of the same site): [huggingface.co/spaces/ilkimaydar/phdthesisproject](https://huggingface.co/spaces/ilkimaydar/phdthesisproject).
 
 ## Contents
 

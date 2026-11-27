@@ -38,6 +38,7 @@ TOPICS = {
     "LIT_X14": ("targets", "Lanes, traffic lights, pedestrians, vehicles"),
     "DECK_SRC": ("background", "Background sources"),
     "LIT_IEEE": ("ieee", "IEEE Xplore search pass"),
+    "EMBED_1": ("embedded", "Vehicle computing platforms and latency budgets"),
 }
 
 CLOSEST = {
@@ -408,8 +409,8 @@ def build(out, labels=None):
 <p>The literature search, the verification scripts, the summaries and this site were produced with assistance from AI models (Anthropic Claude, run through the OpenCode agent tool) under the direction of the project owner. Every catalog entry carries its verification state, and nothing is presented as a finding before an independent check.</p>
 <h2>Licence</h2>
 <p>The repository is under the MIT License, chosen by the owner (LICENSE file in the repository). Paper titles and bibliographic data belong to their publishers and authors.</p>
-<h2>Repository</h2>
-<p>Source of this site, the catalogs and the scripts: <a href="https://github.com/ilkimaydar/phdthesisproject">github.com/ilkimaydar/phdthesisproject</a>. Corrections are welcome through GitHub issues.</p>
+<h2>Repository and mirrors</h2>
+<p>Source of this site, the catalogs and the scripts: <a href="https://github.com/ilkimaydar/phdthesisproject">github.com/ilkimaydar/phdthesisproject</a>. Corrections are welcome through GitHub issues. The same site is mirrored as a Hugging Face Space: <a href="https://huggingface.co/spaces/ilkimaydar/phdthesisproject">huggingface.co/spaces/ilkimaydar/phdthesisproject</a>.</p>
 """
     for name, title, body in (("index.html", "Overview", index_body), ("design.html", "Research design", design_body),
                               ("literature.html", "Literature map", lit_body), ("about.html", "About", about_body)):
