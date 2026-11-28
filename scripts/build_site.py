@@ -304,7 +304,7 @@ def page(title, active, body, built):
 
 def build(out, labels=None):
     papers = load_papers(labels)
-    built = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    built = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d UTC")
     by_id = {}
     for p in papers:
         for pid in p["ids"]:
