@@ -40,6 +40,7 @@ TOPICS = {
     "LIT_IEEE": ("ieee", "IEEE Xplore search pass"),
     "EMBED_1": ("embedded", "Vehicle computing platforms and latency budgets"),
     "LIT_OPT": ("optic", "Light and optic attacks (arXiv harvest)"),
+    "LIT_OPT2": ("optic2", "Light and optic attacks (journals and conferences)"),
 }
 
 CLOSEST = {

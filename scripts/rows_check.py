@@ -19,7 +19,7 @@ import unicodedata
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 BLOCKS = {"LIT_A1": 100, "LIT_A2": 200, "LIT_A3": 300, "LIT_A4": 400, "LIT_A5": 500, "LIT_X": 600, "LIT_IEEE": 700, "SELFTEST": 900,
-          **{f"LIT_X{n}": 900 + 100 * n for n in range(1, 15)}, "DECK_SRC": 2400, "EMBED_1": 2500, "LIT_OPT": 2600}
+          **{f"LIT_X{n}": 900 + 100 * n for n in range(1, 15)}, "DECK_SRC": 2400, "EMBED_1": 2500, "LIT_OPT": 2600, "LIT_OPT2": 2700}
 FIELDS = ["paper_id", "category", "role", "title", "first_author", "venue", "year", "doi", "arxiv_id", "url", "key_idea", "method",
           "data", "reported_result", "relation_to_project", "relevance", "code_or_data", "read_level", "peer_review", "notes"]
 REQUIRED = ["paper_id", "category", "role", "title", "first_author", "venue", "year", "url", "key_idea", "relation_to_project",
